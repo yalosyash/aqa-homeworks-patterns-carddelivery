@@ -41,22 +41,22 @@ class DeliveryTest {
         final int daysToAddForSecondMeeting = 7;
 
         var validUser = DataGenerator.Registration.generateUser("ru");
-        $(inputCity).setValue(DataGenerator.UserInfo.getCity());
+        $(inputCity).setValue(validUser.getCity());
         cleanForm(inputDate);
         $(inputDate).setValue(DataGenerator.generateDate(daysToAddForFirstMeeting));
-        $(inputName).setValue(DataGenerator.UserInfo.getName());
-        $(inputPhone).setValue(DataGenerator.UserInfo.getPhone());
+        $(inputName).setValue(validUser.getName());
+        $(inputPhone).setValue(validUser.getPhone());
         $(checkboxAgreement).click();
         $(submit).click();
         $(successNotification).shouldBe(visible);
         $(notificationData).shouldHave(exactText("Встреча успешно запланирована на " + DataGenerator.generateDate(daysToAddForFirstMeeting)));
 
         open("http://localhost:9999");
-        $(inputCity).setValue(DataGenerator.UserInfo.getCity());
+        $(inputCity).setValue(validUser.getCity());
         cleanForm(inputDate);
         $(inputDate).setValue(DataGenerator.generateDate(daysToAddForSecondMeeting));
-        $(inputName).setValue(DataGenerator.UserInfo.getName());
-        $(inputPhone).setValue(DataGenerator.UserInfo.getPhone());
+        $(inputName).setValue(validUser.getName());
+        $(inputPhone).setValue(validUser.getPhone());
         $(checkboxAgreement).click();
         $(submit).click();
         $(replanNotification).shouldBe(visible).shouldHave(text("У вас уже запланирована встреча на другую дату. Перепланировать?"));
